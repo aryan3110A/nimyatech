@@ -49,62 +49,62 @@ export const heroHighlights = [
 
 export const stats: StatItem[] = [
   {
-    label: "Launch velocity",
+    label: "Faster Project Delivery",
     value: 4,
     suffix: "x",
     description:
-      "Faster execution across strategy, design, engineering, and automation.",
+      "Helping businesses launch faster with smart development, streamlined workflows, and efficient execution.",
   },
   {
-    label: "Delivery coverage",
+    label: "Complete Digital Services",
     value: 9,
     suffix: "+",
     description:
-      "Integrated services spanning AI, web, app, branding, growth, and UX.",
+      "From AI solutions and web development to branding, apps, and digital growth - all in one place.",
   },
   {
-    label: "Automation depth",
+    label: "Automation & Support",
     value: 24,
     suffix: "/7",
     description:
-      "Always-on systems for lead flow, customer support, and operational throughput.",
+      "Smart systems and automated workflows designed to keep your business running anytime, anywhere.",
   },
   {
-    label: "Scalability mindset",
+    label: "Built for Scalability",
     value: 100,
     suffix: "%",
     description:
-      "Every engagement is architected for maintainability, speed, and measurable output.",
+      "Every solution is designed to grow with your business while maintaining speed, reliability, and performance.",
   },
 ];
 
 export const aboutCards: AboutCard[] = [
   {
-    eyebrow: "AI expertise",
-    title: "Systems that make intelligence useful.",
+    eyebrow: "AI solutions",
+    title: "AI tools designed to solve real business problems.",
     description:
-      "From conversational agents to computer vision workflows, NimyaTech builds AI products that move beyond demos and start producing outcomes.",
+      "From chatbots and automation to intelligent workflows and AI integrations, we build solutions that improve productivity and customer experience.",
     accent: "from-cyan-400/25 via-cyan-400/5 to-transparent",
   },
   {
-    eyebrow: "Modern development",
-    title: "Interfaces built to feel premium at every pixel.",
+    eyebrow: "Web & app development",
+    title: "Modern digital experiences for every platform.",
     description:
-      "Responsive product design, clean frontend architecture, and motion systems tuned for speed, trust, and conversion.",
+      "We create fast, responsive, and user-friendly websites and applications designed for performance, scalability, and growth.",
     accent: "from-violet-500/25 via-violet-500/5 to-transparent",
   },
   {
     eyebrow: "Automation",
-    title: "Operational flows that remove friction.",
+    title: "Smart systems that reduce manual work.",
     description:
-      "Lead routing, internal workflows, reporting, and repetitive actions are automated so teams can focus on growth instead of busywork.",
+      "We automate repetitive tasks and business processes so teams can work faster, improve efficiency, and focus on what matters most.",
     accent: "from-fuchsia-400/25 via-fuchsia-400/5 to-transparent",
   },
   {
-    eyebrow: "Scalable tech",
-    title: "Architecture designed for what comes next.",
+    eyebrow: "Scalable technology",
+    title: "Technology built for long-term business growth.",
     description:
-      "NimyaTech ships with extensibility in mind, so products can evolve from pilot to platform without hitting an early ceiling.",
+      "Our solutions are designed to scale with your business, ensuring flexibility, reliability, and future-ready performance.",
     accent: "from-sky-500/25 via-sky-500/5 to-transparent",
   },
 ];

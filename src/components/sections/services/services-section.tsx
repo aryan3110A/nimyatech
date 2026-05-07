@@ -1,11 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-
 import { Reveal } from "@/components/animations/reveal";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { SpotlightCard } from "@/components/shared/spotlight-card";
 import { services } from "@/data/site";
 
 export function ServicesSection() {
@@ -29,33 +25,26 @@ export function ServicesSection() {
 
             return (
               <Reveal key={service.title} delay={index * 0.04}>
-                <motion.div
-                  style={{ transformStyle: "preserve-3d" }}
-                  transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                  whileHover={{
-                    y: -10,
-                    rotateX: 5,
-                    rotateY: index % 2 === 0 ? -5 : 5,
-                  }}
-                >
-                  <SpotlightCard className="section-frame flex h-full min-h-[10rem] flex-col rounded-[28px] p-5 sm:min-h-[18rem] sm:p-6">
-                    <div
-                      className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${service.accent} border border-white/12`}
-                    >
-                      <Icon className="h-6 w-6 text-white" />
+                <div className="service-flip-card group h-full" tabIndex={0}>
+                  <div className="service-flip-inner h-full min-h-[11.5rem] sm:min-h-[12rem]">
+                    <div className="service-flip-face section-frame glass-panel flex h-full flex-col items-center justify-center rounded-[28px] border border-white/10 p-4 text-center sm:p-3">
+                      <div
+                        className={`mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/12 bg-gradient-to-br ${service.accent}`}
+                      >
+                        <Icon className="h-6 w-6 text-white" />
+                      </div>
+                      <h3 className="font-display text-[1.25rem] font-semibold leading-[1.08] tracking-[-0.04em] text-white sm:text-[1.55rem]">
+                        {service.title}
+                      </h3>
                     </div>
-                    <h3 className="mt-5 font-display text-[1.2rem] font-semibold leading-[1.08] tracking-[-0.04em] text-white sm:text-[1.8rem]">
-                      {service.title}
-                    </h3>
-                    <p className="mt-3 flex-1 text-xs leading-4 text-white/58 sm:mt-4 sm:leading-7">
-                      {service.description}
-                    </p>
-                    <div className="mt-2 flex items-center justify-between text-sm font-medium text-white/72 sm:mt-8">
-                      <span>Explore service</span>
-                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+
+                    <div className="service-flip-face service-flip-back section-frame glass-panel flex h-full items-center justify-center rounded-[28px] border border-white/10 p-4 text-center sm:p-5">
+                      <p className="text-sm leading-6 text-white/68 sm:text-[0.98rem] sm:leading-7">
+                        {service.description}
+                      </p>
                     </div>
-                  </SpotlightCard>
-                </motion.div>
+                  </div>
+                </div>
               </Reveal>
             );
           })}

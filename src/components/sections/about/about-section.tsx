@@ -47,12 +47,16 @@ function StatCounter({
       ref={containerRef}
       className="rounded-[26px] border border-white/10 bg-white/[0.035] p-5"
     >
-      <div className="font-display text-4xl font-semibold tracking-[-0.05em] text-white md:text-5xl">
+      <div className="font-display text-[3rem] font-semibold tracking-[-0.05em] text-white sm:text-[1.75rem] md:text-[2rem]">
         {count}
         {suffix}
       </div>
-      <p className="mt-3 text-sm font-semibold text-white/80">{label}</p>
-      <p className="mt-2 text-sm leading-7 text-white/56">{description}</p>
+      <p className="mt-1 text-[0.96rem] font-semibold text-white/80 sm:text-[0.875rem]">
+        {label}
+      </p>
+      <p className="mt-1 text-[0.92rem] leading-6 text-white/56 sm:text-[0.775rem] sm:leading-5">
+        {description}
+      </p>
     </div>
   );
 }
@@ -66,28 +70,27 @@ export function AboutSection() {
       <div className="mx-auto w-full max-w-300">
         <Reveal>
           <SectionHeading
-            description="NimyaTech is built around one idea: sophisticated technology should feel clear, trustworthy, and commercially effective. The delivery model combines product thinking, AI expertise, automation systems, and polished digital design into one cohesive partner layer."
+            description="NimyaTech helps businesses build modern digital products and smart technology solutions. From websites and mobile apps to AI systems, automation, and digital marketing - we create scalable solutions that improve efficiency, strengthen online presence, and drive business growth."
             eyebrow="Introduction"
-            title="A sharper way to turn advanced tech into business momentum."
+            title="Turning ideas into powerful digital solutions that help businesses grow."
           />
         </Reveal>
 
-        <div className="mt-10 grid gap-5 lg:mt-12 lg:gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+        <div className="mt-10 grid gap-5 lg:mt-6 lg:gap-6 xl:grid-cols-[1.05fr_0.95fr]">
           <Reveal>
             <SpotlightCard className="section-frame relative h-full min-h-[10rem] rounded-[30px] p-6 sm:p-7 md:p-8">
               <p className="text-xs uppercase tracking-[0.26em] text-white/44 sm:text-sm sm:tracking-[0.32em]">
-                Core proposition
+                Core services
               </p>
-              <h3 className="mt-4 max-w-xl font-display text-md font-semibold leading-[1.05] tracking-[-0.05em] text-white sm:text-[2.55rem] md:text-3xl">
-                Design the experience. Engineer the system. Accelerate the
-                outcome.
+              <h3 className="mt-2 max-w-xl font-display text-md font-semibold leading-[1.05] tracking-[-0.05em] text-white sm:text-[2.55rem] md:text-2xl">
+                Design better experiences. Build smarter systems. Grow faster.
               </h3>
-              <div className="mt-6 grid gap-3 sm:mt-7 sm:grid-cols-2">
+              <div className="mt-6 grid gap-3 sm:mt-5 sm:grid-cols-2">
                 {[
-                  "Premium interfaces that build trust fast",
-                  "AI systems focused on operational value",
-                  "Automation flows that reduce manual effort",
-                  "Scalable architecture ready for growth",
+                  "Modern websites that build trust",
+                  "AI solutions that improve efficiency",
+                  "Automation that saves time",
+                  "Scalable systems built for growth",
                 ].map((item) => (
                   <div
                     key={item}
@@ -104,7 +107,7 @@ export function AboutSection() {
           <div className="grid gap-5 md:grid-cols-2 md:gap-6">
             {aboutCards.map((card, index) => (
               <Reveal key={card.title} delay={index * 0.06}>
-                <SpotlightCard className="section-frame h-full rounded-[28px] p-5 sm:p-6">
+                <SpotlightCard className="section-frame h-full rounded-[28px] p-5 sm:p-5">
                   <div
                     className={`absolute inset-x-0 top-0 h-24 bg-gradient-to-b ${card.accent}`}
                   />

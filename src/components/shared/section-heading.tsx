@@ -23,10 +23,10 @@ export function SectionHeading({
       <p className="text-sm uppercase tracking-[0.28em] text-white/45 sm:text-xs sm:tracking-[0.32em]">
         {eyebrow}
       </p>
-      <h2 className="font-display text-md font-semibold leading-[1.06] tracking-[-0.04em] text-white sm:text-[2.35rem] md:text-[2.85rem]">
+      <h2 className="font-display text-md font-semibold leading-[1.06] tracking-[-0.04em] text-white sm:text-[1.7rem] md:text-[2rem]">
         {title}
       </h2>
-      <p className="text-xs leading-5 text-white/64 sm:text-base sm:leading-8 md:max-w-2xl">
+      <p className="text-xs leading-5 text-white/64 sm:text-sm sm:leading-4 md:max-w-2xl">
         {description}
       </p>
     </div>

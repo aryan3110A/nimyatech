@@ -163,7 +163,44 @@ main {
   animation: marquee 26s linear infinite;
 }
 
+.service-flip-card {
+  perspective: 1200px;
+}
+
+.service-flip-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-flip-card:hover .service-flip-inner,
+.service-flip-card:focus-within .service-flip-inner,
+.service-flip-card:focus .service-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.service-flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.service-flip-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .service-flip-inner {
+    transition: none !important;
+  }
+
+  .service-flip-card:hover .service-flip-inner,
+  .service-flip-card:focus-within .service-flip-inner,
+  .service-flip-card:focus .service-flip-inner {
+    transform: none;
+  }
+
   *,
   *::before,
   *::after {
