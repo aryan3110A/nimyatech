@@ -226,7 +226,10 @@ export function HeroSection() {
               </div>
 
               <div className="relative flex min-h-[18rem] items-center justify-center overflow-hidden rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(13,19,39,0.88),rgba(9,12,28,0.82))] px-4 py-4 sm:min-h-[20rem] sm:px-5 lg:min-h-[21.5rem]">
-                <div ref={orbitLabelsRef} className="absolute inset-0 hidden lg:block">
+                <div
+                  ref={orbitLabelsRef}
+                  className="absolute inset-0 hidden lg:block"
+                >
                   {orbitLabels.map((item, index) => (
                     <div
                       key={item.label}
