@@ -1,37 +1,45 @@
 "use client";
 
 import gsap from "gsap";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Reveal } from "@/components/animations/reveal";
 import { MagneticButton } from "@/components/shared/magnetic-button";
-import { heroHighlights } from "@/data/site";
 
-const heroWords = ["Build.", "Innovate.", "Scale."];
+const heroWords = [
+  "AI-Powered Digital Excellence.",
+  "Engineering the Future.",
+  "Smart Technology. Real Growth.",
+  "From Vision to Scalable Innovation.",
+  "Intelligent Solutions for Modern Businesses.",
+];
 const heroCapabilities = [
   "AI systems",
-  "Product engineering",
-  "Automation",
+  "Custom software",
+  "Web & mobile apps",
   "Digital growth",
+  "Automation",
+  "Product engineering",
 ];
-const deliveryPillars = [
-  {
-    title: "Discover",
-    description: "Clarify the problem and growth target.",
-  },
-  {
-    title: "Design",
-    description: "Shape the product flow and interface.",
-  },
-  {
-    title: "Deploy",
-    description: "Launch with measurable outcomes.",
-  },
+const heroHighlights = [
+  "AI-powered digital ecosystems",
+  "High-performance product engineering",
+  "Automation designed for scale",
+];
+const orbitLabels = [
+  { label: "AI Solutions", x: 0, y: -124 },
+  { label: "Web & Mobile Apps", x: 104, y: -68 },
+  { label: "Product Engineering", x: 122, y: 8 },
+  { label: "Digital Growth", x: 72, y: 102 },
+  { label: "Custom Software", x: -86, y: 92 },
+  { label: "Automation Systems", x: -124, y: 0 },
 ];
 
 export function HeroSection() {
   const [wordIndex, setWordIndex] = useState(0);
   const [typed, setTyped] = useState("");
+  const orbitLabelsRef = useRef<HTMLDivElement>(null);
+  const orbitTextRefs = useRef<Array<HTMLDivElement | null>>([]);
   const ringPrimaryRef = useRef<HTMLDivElement>(null);
   const ringSecondaryRef = useRef<HTMLDivElement>(null);
   const orbRef = useRef<HTMLDivElement>(null);
@@ -84,6 +92,28 @@ export function HeroSection() {
           yoyo: true,
         });
       }
+
+      if (orbitLabelsRef.current) {
+        gsap.to(orbitLabelsRef.current, {
+          rotate: 360,
+          duration: 24,
+          ease: "none",
+          repeat: -1,
+        });
+      }
+
+      orbitTextRefs.current.forEach((labelRef) => {
+        if (!labelRef) {
+          return;
+        }
+
+        gsap.to(labelRef, {
+          rotate: -360,
+          duration: 24,
+          ease: "none",
+          repeat: -1,
+        });
+      });
     });
 
     return () => context.revert();
@@ -97,40 +127,43 @@ export function HeroSection() {
       <div className="mx-auto grid w-full max-w-300 gap-8 xl:min-h-[calc(100svh-7rem)] xl:grid-cols-[1fr_0.88fr] xl:items-start xl:gap-10">
         <div className="relative z-10">
           <Reveal className="mt-2 sm:mt-4 xl:mt-0" delay={0.08}>
-            <h1 className="max-w-4xl font-display text-[1.75rem] font-semibold leading-[0.98] tracking-[-0.055em] text-white  sm:text-[2.5rem]">
-              Empowering businesses with
+            <h1 className="max-w-4xl font-display text-[1.75rem] font-semibold leading-[0.98] tracking-[-0.055em] text-white  sm:text-[1.75rem]">
+              Empowering brands with
               <span className="bg-[linear-gradient(135deg,#ffffff_0%,#8ce6ff_35%,#8b5cf6_68%,#f9a8d4_100%)] bg-clip-text text-transparent">
                 {" "}
-                AI, technology,
+                AI-driven technology,
               </span>
-              and digital growth.
+              <br /> scalable digital products, and growth-focused innovation.
             </h1>
           </Reveal>
 
           <Reveal className="mt-4 max-w-2xl sm:mt-3" delay={0.14}>
-            <p className="max-w-xl text-[0.95rem] leading-7 text-white/68 sm:text-base sm:leading-7 lg:max-w-[36rem] lg:text-[1.02rem]">
-              <span className="sm:hidden">
-                We design, build, and market digital systems that solve real
-                problems and create measurable growth.
-              </span>
-              <span className="hidden sm:inline">
-                We design, develop, and market solutions that solve real-world
-                problems and create measurable success. From concept to
-                execution, we bring innovation to life.
-              </span>
+            <p className="max-w-xl text-[0.95rem] leading-7 text-white/68 sm:text-sm sm:leading-5 ">
+              NimyaTech helps startups, businesses, and enterprises transform
+              ideas into high-performing digital solutions. From AI-powered
+              systems and custom software to modern web experiences, mobile
+              apps, and digital growth strategies - we create technology that
+              drives measurable impact and long-term scalability.
             </p>
           </Reveal>
 
+          {/* <Reveal className="mt-3 max-w-xl" delay={0.18}>
+            <p className="text-sm leading-5 text-white/48 sm:text-[0.95rem] sm:leading-4">
+              Helping ambitious businesses scale through AI, engineering, and
+              modern digital innovation.
+            </p>
+          </Reveal> */}
+
           <Reveal
-            className="mt-5 flex flex-wrap items-center gap-3 sm:mt-6 sm:gap-4"
+            className="mt-3 flex flex-wrap items-center gap-3 sm:mt-3 sm:gap-4"
             delay={0.2}
           >
-            <div className="hidden rounded-full border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm text-white/74 lg:block lg:px-5">
+            <div className="hidden rounded-full border border-white/10 bg-white/4 px-4 py-2.5 text-sm text-white/74 lg:block lg:px-5">
               {/* <span className="mr-2 text-white/45">Tagline</span> */}
               <span className="font-semibold text-white">{typed}</span>
               <span className="ml-1 inline-block h-4 w-px animate-pulse bg-cyan-300/80 align-middle" />
             </div>
-            <div className="hidden flex-wrap gap-2 lg:flex">
+            <div className="hidden flex-wrap gap-2 lg:flex lg:max-w-3xl">
               {heroCapabilities.map((item) => (
                 <span
                   key={item}
@@ -155,13 +188,13 @@ export function HeroSection() {
           </Reveal>
 
           <Reveal
-            className="mt-7 hidden gap-3 lg:grid lg:grid-cols-2 xl:mt-8 xl:grid-cols-3"
+            className="mt-4 hidden gap-3 lg:grid lg:grid-cols-3 lg:mt-4"
             delay={0.3}
           >
             {heroHighlights.map((highlight) => (
               <div
                 key={highlight}
-                className="rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-4 text-sm leading-6 text-white/62"
+                className="rounded-2xl border border-white/10 bg-white/[0.035] px-3 py-3 text-sm leading-4 text-white/62"
               >
                 {highlight}
               </div>
@@ -178,21 +211,41 @@ export function HeroSection() {
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:34px_34px] opacity-20" />
 
             <div className="relative">
-              <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+              <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
                 <div>
-                  <p className="text-[0.7rem] uppercase tracking-[0.32em] text-white/42">
-                    Why NimyaTech ?
+                  <p className="text-[0.65rem] uppercase tracking-[0.32em] text-white/42">
+                    Why NimyaTech?
                   </p>
-                  <h2 className="mt-2 max-w-[20rem] font-display text-[1.9rem] font-semibold leading-[1.05] tracking-[-0.04em] text-white">
-                    One team for strategy, build, and scale.
+                  <h2 className="mt-1 max-w-[230rem] font-display text-[1.2rem] font-semibold leading-[1.05] tracking-[-0.04em] text-white">
+                    One partner for AI, technology, and scalable digital growth.
                   </h2>
                 </div>
-                <div className="rounded-full border border-cyan-300/20 bg-cyan-300/8 px-3 py-2 text-[0.72rem] uppercase tracking-[0.24em] text-cyan-200/80">
-                  AI-led delivery
+                <div className="rounded-full border border-cyan-300/20 bg-cyan-300/8 px-3 py-1.5 text-[0.6rem] uppercase tracking-[0.24em] text-cyan-200/80">
+                  AI-powered delivery
                 </div>
               </div>
 
               <div className="relative flex min-h-[18rem] items-center justify-center overflow-hidden rounded-[24px] border border-white/10 bg-[linear-gradient(180deg,rgba(13,19,39,0.88),rgba(9,12,28,0.82))] px-4 py-4 sm:min-h-[20rem] sm:px-5 lg:min-h-[21.5rem]">
+                <div ref={orbitLabelsRef} className="absolute inset-0 hidden lg:block">
+                  {orbitLabels.map((item, index) => (
+                    <div
+                      key={item.label}
+                      className="absolute left-1/2 top-1/2"
+                      style={{
+                        transform: `translate(calc(-50% + ${item.x}px), calc(-50% + ${item.y}px))`,
+                      }}
+                    >
+                      <div
+                        ref={(node) => {
+                          orbitTextRefs.current[index] = node;
+                        }}
+                        className="rounded-full border border-white/10 bg-white/5 px-2 py-2 text-[0.52rem] uppercase tracking-[0.18em] text-white/66 shadow-[0_10px_30px_rgba(2,6,23,0.24)]"
+                      >
+                        {item.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
                 <div
                   ref={ringPrimaryRef}
                   className="absolute h-[12.5rem] w-[12.5rem] rounded-full border border-cyan-300/18 sm:h-[14rem] sm:w-[14rem] lg:h-[15.5rem] lg:w-[15.5rem]"
@@ -208,14 +261,16 @@ export function HeroSection() {
                 >
                   <div className="absolute inset-[16%] rounded-full border border-white/15" />
                   <div className="text-center">
-                    <p className="text-[0.65rem] uppercase tracking-[0.32em] text-white/50">
+                    <p className="text-[0.5rem] uppercase tracking-[0.32em] text-white/50">
                       NimyaTech
                     </p>
-                    <p className="mt-2 font-display text-[1.35rem] font-semibold tracking-[-0.04em] text-white sm:text-lg">
-                      Delivery Core
+                    <p className="mt-0 font-display text-[1.35rem] font-semibold tracking-[-0.04em] text-white sm:text-lg">
+                      Innovation Core
                     </p>
-                    <p className="mt-2 px-4 text-[0.7rem] leading-4 text-white/62 sm:px-5 sm:text-xs">
-                      AI strategy, execution, and growth systems in one flow.
+                    <p className="mt-2 px-4 text-[0.7rem] leading-3 text-white/62 sm:px-5 sm:text-[0.65rem]">
+                      AI systems, product engineering, automation, and digital
+                      growth solutions working together to accelerate business
+                      success.
                     </p>
                   </div>
                 </div>
