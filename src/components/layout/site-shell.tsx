@@ -10,8 +10,6 @@ import { ServicesSection } from "@/components/sections/services/services-section
 import { TechStackSection } from "@/components/sections/techstack/techstack-section";
 import { TestimonialsSection } from "@/components/sections/testimonials/testimonials-section";
 import { TimelineSection } from "@/components/sections/timeline/timeline-section";
-import { CustomCursor } from "@/components/layout/custom-cursor";
-import { MouseGlow } from "@/components/layout/mouse-glow";
 import { ScrollProgress } from "@/components/layout/scroll-progress";
 import { SiteBackground } from "@/components/layout/site-background";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
@@ -26,9 +24,7 @@ export function SiteShell() {
   return (
     <SmoothScroll>
       <SiteBackground />
-      <MouseGlow />
       <ScrollProgress />
-      <CustomCursor />
       <Navbar activeSection={activeSection} />
       <main className="overflow-x-clip">
         <HeroSection />
