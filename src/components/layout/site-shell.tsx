@@ -11,7 +11,7 @@ import { TechStackSection } from "@/components/sections/techstack/techstack-sect
 import { TestimonialsSection } from "@/components/sections/testimonials/testimonials-section";
 import { TimelineSection } from "@/components/sections/timeline/timeline-section";
 import { ScrollProgress } from "@/components/layout/scroll-progress";
-import { SiteBackground } from "@/components/layout/site-background";
+import { CustomCursor } from "@/components/layout/custom-cursor";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { navItems } from "@/data/site";
 import { useActiveSection } from "@/hooks/use-active-section";
@@ -23,7 +23,7 @@ export function SiteShell() {
 
   return (
     <SmoothScroll>
-      <SiteBackground />
+      <CustomCursor />
       <ScrollProgress />
       <Navbar activeSection={activeSection} />
       <main className="overflow-x-clip">

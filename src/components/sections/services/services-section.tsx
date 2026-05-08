@@ -1,55 +1,54 @@
 "use client";
 
-import { Reveal } from "@/components/animations/reveal";
-import { SectionHeading } from "@/components/shared/section-heading";
+import { useEffect, useRef } from "react";
 import { services } from "@/data/site";
+import { cn } from "@/lib/utils";
 
 export function ServicesSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("on");
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    const reveals = sectionRef.current?.querySelectorAll(".rv");
+    reveals?.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section
-      id="services"
-      className="scroll-mt-28 px-4 py-14 sm:px-5 sm:py-16 md:px-8 lg:px-10 lg:py-24"
-    >
-      <div className="mx-auto w-full max-w-300">
-        <Reveal>
-          <SectionHeading
-            description="Every service is designed to feel integrated instead of isolated. NimyaTech blends strategy, product design, engineering, automation, and growth into one premium delivery surface."
-            eyebrow="Capability stack"
-            title="Services built to look modern, move fast, and scale cleanly."
-          />
-        </Reveal>
-
-        <div className="mt-10 grid gap-5 sm:mt-12 md:grid-cols-2 md:gap-6 xl:grid-cols-4">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-
-            return (
-              <Reveal key={service.title} delay={index * 0.04}>
-                <div className="service-flip-card group h-full" tabIndex={0}>
-                  <div className="service-flip-inner h-full min-h-[11.5rem] sm:min-h-[12rem]">
-                    <div className="service-flip-face section-frame glass-panel flex h-full flex-col items-center justify-center rounded-[28px] border border-white/10 p-4 text-center sm:p-3">
-                      <div
-                        className={`mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/12 bg-gradient-to-br ${service.accent}`}
-                      >
-                        <Icon className="h-6 w-6 text-white" />
-                      </div>
-                      <h3 className="font-display text-[1.25rem] font-semibold leading-[1.08] tracking-[-0.04em] text-white sm:text-[1.55rem]">
-                        {service.title}
-                      </h3>
-                    </div>
-
-                    <div className="service-flip-face service-flip-back section-frame glass-panel flex h-full items-center justify-center rounded-[28px] border border-white/10 p-4 text-center sm:p-5">
-                      <p className="text-sm leading-6 text-white/68 sm:text-[0.98rem] sm:leading-7">
-                        {service.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-            );
-          })}
+    <>
+      <div className="divider" />
+      <section id="services" ref={sectionRef} className="px-6 py-24 md:px-14 bg-white">
+        <div className="lbl rv flex items-center gap-2 text-[0.72rem] tracking-[0.22em] text-[var(--accent)] uppercase mb-3.5 font-semibold before:content-[''] before:w-5 before:h-[1.5px] before:bg-[var(--accent)] before:rounded-[2px]">
+          What We Do
         </div>
-      </div>
-    </section>
+        <h2 className="rv font-[var(--font-h)] text-[clamp(2rem,3.8vw,3rem)] font-bold line-height-[1.08] tracking-[-1.5px] text-[var(--ink)] mb-3.5">
+          Services for<br /><span className="acc">modern business</span>
+        </h2>
+        
+        <div className="svc-g grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+          {services.map((service, i) => (
+            <div key={service.title} className={cn("svc-c rv bg-[var(--bg)] border border-[var(--border)] rounded-[18px] p-6 transition-all hover:bg-white hover:border-[rgba(42,90,255,0.3)] hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(0,0,0,0.06)] group relative overflow-hidden", `d${i % 4}`)}>
+              <div className="svc-ic w-11 h-11 rounded-xl bg-gradient-to-br from-[rgba(42,90,255,0.1)] to-[rgba(124,58,237,0.07)] border border-[rgba(42,90,255,0.15)] flex items-center justify-center text-[1.2rem] mb-4 transition-transform group-hover:scale-[1.08] group-hover:-rotate-4">
+                {i === 0 ? "🧠" : i === 1 ? "🌐" : i === 2 ? "📱" : i === 3 ? "📢" : i === 4 ? "💬" : i === 5 ? "⚙️" : i === 6 ? "✦" : "🎨"}
+              </div>
+              <div className="svc-n font-[var(--font-h)] text-[0.95rem] font-semibold mb-[7px] text-[var(--ink)]">{service.title}</div>
+              <div className="svc-d text-[var(--ink3)] text-[0.8rem] line-height-[1.55]">{service.description}</div>
+              <div className="svc-arr absolute bottom-5 right-5 w-7 h-7 rounded-full bg-[var(--accent)] text-white flex items-center justify-center text-[0.85rem] opacity-0 scale-[0.7] transition-all group-hover:opacity-100 group-hover:scale-100">↗</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

@@ -1,68 +1,64 @@
-import { Star } from "lucide-react";
+"use client";
 
-import { Reveal } from "@/components/animations/reveal";
-import { SectionHeading } from "@/components/shared/section-heading";
+import { useEffect, useRef } from "react";
 import { testimonials } from "@/data/site";
+import { cn } from "@/lib/utils";
 
 export function TestimonialsSection() {
-  const marqueeItems = [...testimonials, ...testimonials];
+  const sectionRef = useRef<HTMLElement>(null);
+  const marqueeItems = [...testimonials, ...testimonials, ...testimonials];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("on");
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    const reveals = sectionRef.current?.querySelectorAll(".rv");
+    reveals?.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section
-      id="testimonials"
-      className="scroll-mt-28 px-4 py-14 sm:px-5 sm:py-16 md:px-8 lg:px-10 lg:py-24"
-    >
-      <div className="mx-auto w-full max-w-300">
-        <Reveal>
-          <SectionHeading
-            description="Social proof should feel as premium as the rest of the experience. These testimonials move horizontally in a soft marquee to keep the section alive without becoming noisy."
-            eyebrow="What others say"
-            title="Trust signals presented with motion, depth, and restraint."
-          />
-        </Reveal>
+    <>
+      <div className="divider" />
+      <section id="testimonials" ref={sectionRef} className="px-6 py-24 md:px-14 bg-[var(--bg)] overflow-hidden">
+        <div className="lbl rv flex items-center gap-2 text-[0.72rem] tracking-[0.22em] text-[var(--accent)] uppercase mb-3.5 font-semibold before:content-[''] before:w-5 before:h-[1.5px] before:bg-[var(--accent)] before:rounded-[2px]">
+          Testimonials
+        </div>
+        <h2 className="rv font-[var(--font-h)] text-[clamp(2rem,3.8vw,3rem)] font-bold line-height-[1.08] tracking-[-1.5px] text-[var(--ink)] mb-12">
+          What our<br /><span className="acc">clients say</span>
+        </h2>
 
-        <div className="mask-fade-horizontal mt-10 overflow-hidden sm:mt-12">
-          <div className="flex min-w-max animate-marquee gap-4 sm:gap-6 hover:[animation-play-state:paused]">
-            {marqueeItems.map((item, index) => (
-              <article
-                key={`${item.name}-${index}`}
-                className="section-frame glass-panel relative flex w-[18rem] shrink-0 flex-col rounded-[28px] border border-white/10 p-5 shadow-[0_20px_70px_rgba(2,6,23,0.3)] sm:w-[20rem] sm:p-6 md:w-[22rem]"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex gap-1 text-amber-300">
-                    {Array.from({ length: 5 }).map((_, starIndex) => (
-                      <Star
-                        key={`${item.name}-star-${starIndex}`}
-                        className="h-4 w-4 fill-current"
-                      />
-                    ))}
+        <div className="mq-w rv overflow-hidden relative py-4 before:content-[''] before:absolute before:inset-y-0 before:left-0 before:w-[120px] before:z-[2] before:bg-gradient-to-r before:from-[var(--bg)] before:to-transparent after:content-[''] after:absolute after:inset-y-0 after:right-0 after:w-[120px] after:z-[2] after:bg-gradient-to-l after:from-[var(--bg)] after:to-transparent">
+          <div className="mq-t flex gap-5 animate-mq hover:[animation-play-state:paused] w-max">
+            {marqueeItems.map((item, i) => (
+              <div key={`${item.name}-${i}`} className="testi-c bg-white border border-[var(--border)] rounded-[22px] p-7 w-[340px] shrink-0 transition-all hover:border-[rgba(42,90,255,0.3)] hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.05)]">
+                <div className="testi-q text-[1.5rem] text-[var(--accent)] opacity-40 mb-3 font-serif">"</div>
+                <div className="testi-txt text-[var(--ink2)] text-[0.88rem] line-height-[1.6] mb-6 font-medium italic leading-relaxed">
+                  {item.quote}
+                </div>
+                <div className="testi-user flex items-center gap-3.5 pt-5 border-t border-[var(--border)]">
+                  <div className="testi-av w-10 h-10 rounded-full bg-gradient-to-br from-[rgba(42,90,255,0.1)] to-[rgba(124,58,237,0.1)] flex items-center justify-center font-bold text-[var(--accent)] text-[0.85rem]">
+                    {item.name.charAt(0)}
                   </div>
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] font-display text-lg font-semibold text-white">
-                    {item.name
-                      .split(" ")
-                      .map((part) => part[0])
-                      .join("")
-                      .slice(0, 2)}
+                  <div>
+                    <div className="testi-n text-[var(--ink)] text-[0.88rem] font-bold">{item.name}</div>
+                    <div className="testi-r text-[var(--ink3)] text-[0.72rem] uppercase tracking-[0.05em] mt-0.5">{item.role}, {item.company}</div>
                   </div>
                 </div>
-
-                <p className="mt-6 text-[0.98rem] leading-7 text-white/68 sm:mt-8 sm:text-base sm:leading-8">
-                  &quot;{item.quote}&quot;
-                </p>
-
-                <div className="mt-8 border-t border-white/10 pt-4 sm:mt-10 sm:pt-5">
-                  <p className="font-display text-[1.2rem] font-semibold tracking-[-0.03em] text-white sm:text-xl">
-                    {item.name}
-                  </p>
-                  <p className="mt-1 text-sm text-cyan-200/80">
-                    {item.role} of {item.company}
-                  </p>
-                </div>
-              </article>
+              </div>
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

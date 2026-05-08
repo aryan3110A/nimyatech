@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import { navItems } from "@/data/site";
@@ -17,7 +16,7 @@ export function Navbar({ activeSection }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 18);
+    const handleScroll = () => setScrolled(window.scrollY > 50);
 
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -33,98 +32,90 @@ export function Navbar({ activeSection }: NavbarProps) {
   }, [mobileOpen]);
 
   return (
-    <motion.header
-      animate={{ opacity: 1, y: 0 }}
-      className="fixed inset-x-0 top-0 z-[72]"
-      initial={{ opacity: 0, y: -18 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+    <header
+      id="nav"
+      className={cn(
+        "fixed top-0 left-0 right-0 z-[1000] px-6 py-[22px] md:px-14 flex items-center justify-between transition-all duration-400",
+        scrolled && "bg-[rgba(247,246,243,0.85)] backdrop-blur-[20px] border-b border-[var(--border)] py-[14px]"
+      )}
     >
-      <div className="mx-auto flex w-full max-w-315 items-center justify-between px-2 py-4 sm:px-5 md:px-4 lg:px-0">
-        <div
-          className={cn(
-            "section-frame glass-panel flex w-full items-center justify-between rounded-full border border-white/10 px-2 md:px-4 py-1 md:py-2 shadow-[0_16px_70px_rgba(3,7,18,0.28)] transition-all duration-300",
-            scrolled && "border-cyan-300/20 bg-[rgba(8,11,24,0.82)] shadow-[0_20px_90px_rgba(3,7,18,0.42)]",
-          )}
-        >
-          <a className="flex items-center gap-1.5 sm:gap-3" href="#top">
-            <Image
-              alt="NimyaTech logo"
-              className="h-auto w-[24px] shrink-0 object-contain sm:w-[32px]"
-              height={50}
-              priority
-              src="/logo-DZTJZMZn.png"
-              width={50}
-            />
-            <div>
-              <p className="font-display text-base font-semibold tracking-[-0.03em] text-white md:text-md">
-                NimyaTech
-              </p>
-              <p className="hidden text-[0.5rem] uppercase tracking-[0.22em] text-white/38 lg:block">
-                Turning complexity into clarity
-              </p>
-            </div>
-          </a>
-
-          <nav className="hidden items-center gap-2 lg:flex">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.id;
-
-              return (
-                <a
-                  key={item.id}
-                  className={cn(
-                    "relative rounded-full px-4 py-2 text-sm font-medium text-white/68 transition-colors duration-300 hover:text-white",
-                    isActive && "text-white",
-                  )}
-                  href={`#${item.id}`}
-                >
-                  <span>{item.label}</span>
-                  <span
-                    className={cn(
-                      "absolute inset-x-4 bottom-1 h-px origin-left rounded-full bg-gradient-to-r from-cyan-300 to-violet-400 transition-transform duration-300",
-                      isActive ? "scale-x-100" : "scale-x-0",
-                    )}
-                  />
-                </a>
-              );
-            })}
-          </nav>
-
-          <button
-            aria-label="Toggle mobile menu"
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white lg:hidden"
-            onClick={() => setMobileOpen((value) => !value)}
-            type="button"
-          >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
+      <div className="logo font-[var(--font-h)] text-[1.4rem] font-bold text-[var(--ink)] tracking-[-0.5px]">
+        Nimya<span className="text-[var(--accent)]">Tech</span>
       </div>
 
+      {/* Desktop Links */}
+      <ul className="hidden lg:flex gap-8 list-none items-center">
+        {navItems.map((item) => (
+          <li key={item.id}>
+            <a
+              className={cn(
+                "text-[0.875rem] font-medium tracking-[0.01em] transition-colors duration-250",
+                activeSection === item.id ? "text-[var(--ink)]" : "text-[var(--ink2)] hover:text-[var(--ink)]"
+              )}
+              href={`#${item.id}`}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <button 
+        className="nav-btn hidden md:block bg-[var(--ink)] text-white px-[22px] py-[9px] rounded-[100px] text-[0.82rem] font-medium border-none cursor-none font-[var(--font-b)] transition-all duration-250 hover:bg-[var(--accent)] hover:scale-[1.03]"
+        onClick={() => {
+          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+        }}
+      >
+        Get Started →
+      </button>
+
+      {/* Mobile Toggle */}
+      <button
+        aria-label="Toggle mobile menu"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-full text-[var(--ink)] lg:hidden"
+        onClick={() => setMobileOpen((value) => !value)}
+        type="button"
+      >
+        {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+      </button>
+
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen ? (
           <motion.div
             animate={{ opacity: 1, y: 0 }}
-            className="mx-5 mt-2 rounded-[28px] border border-white/10 bg-[rgba(7,10,25,0.94)] p-5 shadow-[0_24px_80px_rgba(2,6,23,0.5)] backdrop-blur-xl md:mx-8 lg:hidden"
-            exit={{ opacity: 0, y: -14 }}
-            initial={{ opacity: 0, y: -14 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 top-[70px] bg-[var(--bg)] p-6 z-[1001] lg:hidden"
+            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
           >
-            <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col gap-6">
               {navItems.map((item) => (
                 <a
                   key={item.id}
-                  className="rounded-2xl border border-white/8 bg-white/[0.03] px-4 py-3 text-sm font-medium text-white/78"
+                  className={cn(
+                    "text-xl font-semibold transition-colors",
+                    activeSection === item.id ? "text-[var(--accent)]" : "text-[var(--ink)]"
+                  )}
                   href={`#${item.id}`}
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
                 </a>
               ))}
+              <button 
+                className="mt-4 bg-[var(--ink)] text-white px-6 py-3 rounded-full font-medium"
+                onClick={() => {
+                  setMobileOpen(false);
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Get Started →
+              </button>
             </nav>
           </motion.div>
         ) : null}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }

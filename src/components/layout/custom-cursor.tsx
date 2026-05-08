@@ -1,47 +1,50 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export function CustomCursor() {
-  const [enabled, setEnabled] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const curRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const media = window.matchMedia("(pointer: fine) and (min-width: 1024px)");
+    const cur = curRef.current;
+    const ring = ringRef.current;
+    if (!cur || !ring) return;
 
-    const updateEnabled = () => setEnabled(media.matches);
-    updateEnabled();
+    let mx = window.innerWidth / 2;
+    let my = window.innerHeight / 2;
+    let rx = mx;
+    let ry = my;
 
-    const handleMove = (event: MouseEvent) => {
-      setPosition({ x: event.clientX, y: event.clientY });
+    const onMouseMove = (e: MouseEvent) => {
+      mx = e.clientX;
+      my = e.clientY;
+      cur.style.left = mx + "px";
+      cur.style.top = my + "px";
     };
 
-    media.addEventListener("change", updateEnabled);
-    window.addEventListener("mousemove", handleMove, { passive: true });
+    let animationId: number;
+    const loop = () => {
+      rx += (mx - rx) * 0.1;
+      ry += (my - ry) * 0.1;
+      ring.style.left = rx + "px";
+      ring.style.top = ry + "px";
+      animationId = requestAnimationFrame(loop);
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    animationId = requestAnimationFrame(loop);
 
     return () => {
-      media.removeEventListener("change", updateEnabled);
-      window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("mousemove", onMouseMove);
+      cancelAnimationFrame(animationId);
     };
   }, []);
 
-  if (!enabled) {
-    return null;
-  }
-
   return (
     <>
-      <motion.div
-        animate={{ x: position.x - 4, y: position.y - 4 }}
-        className="pointer-events-none fixed left-0 top-0 z-[80] h-2 w-2 rounded-full bg-white mix-blend-difference"
-        transition={{ type: "spring", stiffness: 1200, damping: 70, mass: 0.2 }}
-      />
-      <motion.div
-        animate={{ x: position.x - 20, y: position.y - 20 }}
-        className="pointer-events-none fixed left-0 top-0 z-[79] h-10 w-10 rounded-full border border-cyan-300/45 bg-cyan-300/5"
-        transition={{ type: "spring", stiffness: 260, damping: 30, mass: 0.5 }}
-      />
+      <div id="cur" ref={curRef}></div>
+      <div id="cur-r" ref={ringRef}></div>
     </>
   );
 }
