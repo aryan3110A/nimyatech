@@ -35,28 +35,28 @@ export function HeroSection() {
       <div className="hero-blob hb1 absolute w-[500px] h-[500px] bg-[rgba(42,90,255,0.07)] top-[-60px] right-[-80px] rounded-full blur-[80px] animate-[hbf_9s_ease-in-out_infinite]" />
       <div className="hero-blob hb2 absolute w-[300px] h-[300px] bg-[rgba(124,58,237,0.06)] bottom-[-40px] left-[5%] rounded-full blur-[80px] animate-[hbf_12s_ease-in-out_infinite_reverse]" />
       
-      <div className="hero-l relative z-10 max-w-[640px]">
-        <div className="h-badge inline-flex items-center gap-[7px] bg-[#f0eeff] border border-[rgba(124,58,237,0.2)] rounded-[100px] padding-[5px_14px_5px_8px] px-3 py-1 text-[0.78rem] text-[var(--accent2)] mb-7 font-medium opacity-0 animate-[fu_0.7s_0.15s_forwards]">
+      <div className="hero-l relative z-10 max-w-[900px]">
+        {/* <div className="h-badge inline-flex items-center gap-[7px] bg-[#f0eeff] border border-[rgba(124,58,237,0.2)] rounded-[100px] padding-[5px_14px_5px_8px] px-3 py-1 text-[0.78rem] text-[var(--accent2)] mb-7 font-medium opacity-0 animate-[fu_0.7s_0.15s_forwards]">
           <div className="h-badge-dot w-1.5 h-1.5 bg-[var(--accent2)] rounded-full animate-[pd_2s_infinite]" />
           AI · Web · Automation
-        </div>
+        </div> */}
         
         <h1 className="font-[var(--font-h)] text-[clamp(3rem,6.5vw,5.2rem)] font-bold leading-[1.04] tracking-[-2.5px] mb-[22px] text-[var(--ink)] opacity-0 animate-[fu_0.9s_0.3s_forwards]">
-          <span className="acc">Technology</span><br />that moves<br />businesses forward.
+          Build. Innovate. Scale.
         </h1>
         
         <p className="hero-p text-[var(--ink2)] text-[1.05rem] leading-[1.7] font-normal max-w-[500px] mb-9 opacity-0 animate-[fu_0.8s_0.55s_forwards]">
-          We design, build, and scale digital products — from AI systems to stunning web apps.
+          We create AI-powered digital experiences that help businesses grow faster, smarter, and stronger.
         </p>
         
-        <div className="hero-btns flex gap-[14px] opacity-0 animate-[fu_0.8s_0.7s_forwards]">
+        {/* <div className="hero-btns flex gap-[14px] opacity-0 animate-[fu_0.8s_0.7s_forwards]">
           <a href="#services" className="btn-p bg-[var(--ink)] text-white px-[30px] py-[13px] rounded-[100px] text-[0.9rem] font-medium inline-flex items-center gap-[7px] transition-all hover:bg-[var(--accent)] hover:-translate-y-0.5">
             Explore Services →
           </a>
           <a href="#projects" className="btn-g bg-transparent text-[var(--ink)] px-[30px] py-[13px] rounded-[100px] text-[0.9rem] font-medium border-[1.5px] border-[var(--border)] transition-all hover:border-[var(--ink)] hover:-translate-y-0.5">
             View Work
           </a>
-        </div>
+        </div> */}
         
         <div className="stats flex gap-0 mt-12 pt-9 border-t border-[var(--border)] opacity-0 animate-[fu_0.8s_0.85s_forwards]">
           {stats.slice(0, 3).map((stat, i) => (

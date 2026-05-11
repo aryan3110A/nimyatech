@@ -3,6 +3,7 @@ import type { LucideIcon } from "lucide-react";
 export type NavItem = {
   id: string;
   label: string;
+  href?: string;
 };
 
 export type StatItem = {
@@ -24,6 +25,7 @@ export type ServiceItem = {
   description: string;
   icon: LucideIcon;
   accent: string;
+  image: string;
 };
 
 export type TimelineItem = {

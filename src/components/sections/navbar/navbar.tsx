@@ -4,14 +4,17 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import Link from "next/link";
+import { ContactModal } from "@/components/modals/contact-modal";
 import { navItems } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 type NavbarProps = {
   activeSection: string;
+  onContactClick: () => void;
 };
 
-export function Navbar({ activeSection }: NavbarProps) {
+export function Navbar({ activeSection, onContactClick }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -39,35 +42,44 @@ export function Navbar({ activeSection }: NavbarProps) {
         scrolled && "bg-[rgba(247,246,243,0.85)] backdrop-blur-[20px] border-b border-[var(--border)] py-[14px]"
       )}
     >
-      <div className="logo font-[var(--font-h)] text-[1.4rem] font-bold text-[var(--ink)] tracking-[-0.5px]">
+      <Link href="/" className="logo font-[var(--font-h)] text-[1.4rem] font-bold text-[var(--ink)] tracking-[-0.5px]">
         Nimya<span className="text-[var(--accent)]">Tech</span>
-      </div>
+      </Link>
 
-      {/* Desktop Links */}
       <ul className="hidden lg:flex gap-8 list-none items-center">
         {navItems.map((item) => (
           <li key={item.id}>
-            <a
-              className={cn(
-                "text-[0.875rem] font-medium tracking-[0.01em] transition-colors duration-250",
-                activeSection === item.id ? "text-[var(--ink)]" : "text-[var(--ink2)] hover:text-[var(--ink)]"
-              )}
-              href={`#${item.id}`}
-            >
-              {item.label}
-            </a>
+            {item.id === "contact" ? (
+              <button
+                onClick={onContactClick}
+                className={cn(
+                  "text-[0.875rem] font-medium tracking-[0.01em] transition-colors duration-250 cursor-none",
+                  activeSection === item.id ? "text-[var(--ink)]" : "text-[var(--ink2)] hover:text-[var(--ink)]"
+                )}
+              >
+                {item.label}
+              </button>
+            ) : (
+              <Link
+                className={cn(
+                  "text-[0.875rem] font-medium tracking-[0.01em] transition-colors duration-250",
+                  activeSection === item.id ? "text-[var(--ink)]" : "text-[var(--ink2)] hover:text-[var(--ink)]"
+                )}
+                href={item.href || `/#${item.id}`}
+              >
+                {item.label}
+              </Link>
+            )}
           </li>
         ))}
       </ul>
 
-      <button 
+      {/* <button 
         className="nav-btn hidden md:block bg-[var(--ink)] text-white px-[22px] py-[9px] rounded-[100px] text-[0.82rem] font-medium border-none cursor-none font-[var(--font-b)] transition-all duration-250 hover:bg-[var(--accent)] hover:scale-[1.03]"
-        onClick={() => {
-          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-        }}
+        onClick={onContactClick}
       >
         Get Started →
-      </button>
+      </button> */}
 
       {/* Mobile Toggle */}
       <button
@@ -91,27 +103,33 @@ export function Navbar({ activeSection }: NavbarProps) {
           >
             <nav className="flex flex-col gap-6">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.id}
                   className={cn(
-                    "text-xl font-semibold transition-colors",
+                    "text-xl font-semibold transition-colors text-left",
                     activeSection === item.id ? "text-[var(--accent)]" : "text-[var(--ink)]"
                   )}
-                  href={`#${item.id}`}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={() => {
+                    setMobileOpen(false);
+                    if (item.id === "contact") {
+                      onContactClick();
+                    } else {
+                      window.location.href = item.href || `/#${item.id}`;
+                    }
+                  }}
                 >
                   {item.label}
-                </a>
+                </button>
               ))}
-              <button 
+              {/* <button 
                 className="mt-4 bg-[var(--ink)] text-white px-6 py-3 rounded-full font-medium"
                 onClick={() => {
                   setMobileOpen(false);
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  onContactClick();
                 }}
               >
                 Get Started →
-              </button>
+              </button> */}
             </nav>
           </motion.div>
         ) : null}

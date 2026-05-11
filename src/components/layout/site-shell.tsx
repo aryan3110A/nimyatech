@@ -15,28 +15,38 @@ import { CustomCursor } from "@/components/layout/custom-cursor";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { navItems } from "@/data/site";
 import { useActiveSection } from "@/hooks/use-active-section";
+import { ContactModal } from "@/components/modals/contact-modal";
+import { useState } from "react";
 
 const observedSections = navItems.map((item) => item.id);
 
 export function SiteShell() {
   const activeSection = useActiveSection(observedSections);
+  const [isContactOpen, setIsContactOpen] = useState(false);
 
   return (
-    <SmoothScroll>
-      <CustomCursor />
-      <ScrollProgress />
-      <Navbar activeSection={activeSection} />
-      <main className="overflow-x-clip">
-        <HeroSection />
-        <AboutSection />
-        <ServicesSection />
-        <TimelineSection />
-        <TechStackSection />
-        <ProjectsSection />
-        <TestimonialsSection />
-        <ContactSection />
-      </main>
-      <FooterSection />
-    </SmoothScroll>
+    <>
+      <SmoothScroll>
+        <CustomCursor />
+        <ScrollProgress />
+        <Navbar activeSection={activeSection} onContactClick={() => setIsContactOpen(true)} />
+        <main className="overflow-x-clip">
+          <HeroSection />
+          {/* <AboutSection /> */}
+          <ServicesSection />
+          {/* <TimelineSection /> */}
+          <TechStackSection />
+          {/* <ProjectsSection /> */}
+          <TestimonialsSection />
+          <ContactSection />
+        </main>
+        <FooterSection />
+      </SmoothScroll>
+
+      <ContactModal
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
+    </>
   );
 }

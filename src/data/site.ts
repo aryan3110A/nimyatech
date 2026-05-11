@@ -34,10 +34,10 @@ import type {
 } from "@/types/site";
 
 export const navItems: NavItem[] = [
-  { id: "about", label: "About" },
-  { id: "services", label: "Services" },
-  { id: "projects", label: "Projects" },
-  { id: "testimonials", label: "Testimonials" },
+  { id: "about", label: "About", href: "/about" },
+  { id: "services", label: "Services", href: "/services" },
+  // { id: "projects", label: "Projects" },
+  // { id: "testimonials", label: "Testimonials" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -116,6 +116,7 @@ export const services: ServiceItem[] = [
       "Production-ready AI workflows, copilots, recommendation engines, and domain-specific intelligence layers.",
     icon: Bot,
     accent: "from-cyan-400/30 to-blue-500/20",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "Web Development",
@@ -123,6 +124,7 @@ export const services: ServiceItem[] = [
       "Fast, cinematic, conversion-focused websites and platforms engineered for performance and clarity.",
     icon: Braces,
     accent: "from-violet-400/30 to-fuchsia-500/20",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "App Development",
@@ -130,6 +132,7 @@ export const services: ServiceItem[] = [
       "Cross-platform product experiences with cohesive UX, smooth interactions, and scalable architecture.",
     icon: MonitorSmartphone,
     accent: "from-sky-400/30 to-cyan-400/20",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "Digital Marketing",
@@ -137,6 +140,7 @@ export const services: ServiceItem[] = [
       "Demand capture systems, content funnels, campaign pages, and analytics tuned for measurable growth.",
     icon: Megaphone,
     accent: "from-fuchsia-400/30 to-violet-500/20",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "Custom Chatbots",
@@ -144,6 +148,7 @@ export const services: ServiceItem[] = [
       "Brand-aware assistants for support, onboarding, lead qualification, and knowledge access.",
     icon: MessageSquareMore,
     accent: "from-blue-400/30 to-cyan-500/20",
+    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "Automation",
@@ -151,6 +156,7 @@ export const services: ServiceItem[] = [
       "Connected systems that streamline CRM actions, workflows, notifications, and reporting.",
     icon: Workflow,
     accent: "from-emerald-400/25 to-cyan-500/20",
+    image: "https://images.unsplash.com/photo-1518433278981-22442436f56c?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "Branding",
@@ -158,6 +164,7 @@ export const services: ServiceItem[] = [
       "Visual identity systems, verbal direction, and brand assets that feel modern, sharp, and credible.",
     icon: PenTool,
     accent: "from-amber-300/25 to-fuchsia-500/20",
+    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "UI/UX Design",
@@ -165,6 +172,7 @@ export const services: ServiceItem[] = [
       "Research-backed product design with elegant flows, tactile interactions, and premium polish.",
     icon: Palette,
     accent: "from-indigo-400/30 to-violet-500/20",
+    image: "https://images.unsplash.com/photo-1586717791821-3f44a563cc4c?auto=format&fit=crop&q=80&w=800",
   },
 ];
 

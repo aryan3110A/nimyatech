@@ -100,10 +100,21 @@ body:has(button:hover) #cur {
   transform: none;
 }
 
-.d1 { transition-delay: .08s; }
-.d2 { transition-delay: .16s; }
-.d3 { transition-delay: .24s; }
-.d4 { transition-delay: .32s; }
+.d1 {
+  transition-delay: .08s;
+}
+
+.d2 {
+  transition-delay: .16s;
+}
+
+.d3 {
+  transition-delay: .24s;
+}
+
+.d4 {
+  transition-delay: .32s;
+}
 
 /* Utilities */
 .acc {
@@ -121,31 +132,62 @@ body:has(button:hover) #cur {
 
 /* Animations */
 @keyframes hbf {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-24px) scale(1.04); }
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-24px) scale(1.04);
+  }
 }
 
 @keyframes pd {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, .5); }
-  70% { box-shadow: 0 0 0 6px transparent; }
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, .5);
+  }
+
+  70% {
+    box-shadow: 0 0 0 6px transparent;
+  }
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes pp {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(42, 90, 255, .1); }
-  50% { box-shadow: 0 0 0 20px rgba(42, 90, 255, .04); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(42, 90, 255, .1);
+  }
+
+  50% {
+    box-shadow: 0 0 0 20px rgba(42, 90, 255, .04);
+  }
 }
 
 @keyframes mq {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes fu {
-  to { opacity: 1; transform: translateY(0); }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-mq {
@@ -154,4 +196,35 @@ body:has(button:hover) #cur {
 
 .animate-mq:hover {
   animation-play-state: paused;
+}
+
+/* Flip Card Styles */
+.flip-card {
+  perspective: 1200px;
+  background-color: transparent;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 18px;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
 }

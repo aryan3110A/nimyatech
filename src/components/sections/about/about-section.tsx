@@ -33,7 +33,7 @@ export function AboutSection() {
           About Us
         </div>
         <h2 className="rv font-[var(--font-h)] text-[clamp(2rem,3.8vw,3rem)] font-bold line-height-[1.08] tracking-[-1.5px] text-[var(--ink)] mb-3.5">
-          Built for the<br /><span className="acc">age of AI</span>
+          Built for the <span className="acc">age of AI</span>
         </h2>
         
         <div className="about-g grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

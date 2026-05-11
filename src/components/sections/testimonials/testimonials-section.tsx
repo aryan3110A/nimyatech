@@ -34,7 +34,7 @@ export function TestimonialsSection() {
           Testimonials
         </div>
         <h2 className="rv font-[var(--font-h)] text-[clamp(2rem,3.8vw,3rem)] font-bold line-height-[1.08] tracking-[-1.5px] text-[var(--ink)] mb-12">
-          What our<br /><span className="acc">clients say</span>
+          What our <span className="acc">clients say</span>
         </h2>
 
         <div className="mq-w rv overflow-hidden relative py-4 before:content-[''] before:absolute before:inset-y-0 before:left-0 before:w-[120px] before:z-[2] before:bg-gradient-to-r before:from-[var(--bg)] before:to-transparent after:content-[''] after:absolute after:inset-y-0 after:right-0 after:w-[120px] after:z-[2] after:bg-gradient-to-l after:from-[var(--bg)] after:to-transparent">

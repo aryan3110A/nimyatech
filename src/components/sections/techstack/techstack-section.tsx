@@ -37,7 +37,7 @@ export function TechStackSection() {
           Tech Stack
         </div>
         <h2 className="rv font-[var(--font-h)] text-[clamp(2rem,3.8vw,3rem)] font-bold line-height-[1.08] tracking-[-1.5px] text-[var(--ink)] mb-3.5">
-          Powered by<br /><span className="acc">modern tools</span>
+          Powered by <span className="acc">modern tools</span>
         </h2>
         <div className="h-10" />
         
